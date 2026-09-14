@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Det sunkne Atlantis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box} body{margin:0;min-height:100vh;background:#f4efe6;color:#222;font-family:"Montserrat",Arial,sans-serif;display:flex;justify-content:center}
+main{width:min(100%,620px);text-align:center;padding-bottom:max(28px,env(safe-area-inset-bottom))}
+.cover-wrap{position:relative;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}
+.cover{display:block;width:100%;height:auto}
+.play-button{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:92px;height:92px;border-radius:50%;border:3px solid rgba(255,255,255,.92);background:rgba(0,0,0,.45);color:#fff;font-size:42px;line-height:86px;text-align:center;padding-left:6px;box-shadow:0 4px 18px rgba(0,0,0,.35)}
+.content{padding:24px 20px 0} h1{margin:0 0 8px;font-size:clamp(26px,7vw,38px);font-weight:600} p{margin:0 0 20px;font-size:16px} audio{width:100%} .hint{margin-top:12px;font-size:13px;opacity:.7}
+</style>
+</head>
+<body><main>
+<div class="cover-wrap" id="coverButton" role="button" tabindex="0" aria-label="Spill av Det sunkne Atlantis">
+<img class="cover" src="atlantis.jpg" alt="Illustrasjon fra Det sunkne Atlantis"><div class="play-button" id="playIcon">▶</div></div>
+<div class="content"><h1>Det sunkne Atlantis</h1><p>Bessens Illustrerte Lydbøker</p>
+<audio id="player" controls preload="metadata"><source src="atlantis.m4a" type="audio/mp4">Nettleseren din støtter ikke lydavspilling.</audio>
+<div class="hint">Trykk på bildet for å spille av eller sette på pause.</div></div>
+</main>
+<script>
+const player=document.getElementById('player'),coverButton=document.getElementById('coverButton'),playIcon=document.getElementById('playIcon');
+function updateIcon(){playIcon.textContent=player.paused?'▶':'❚❚'}
+function togglePlayback(){player.paused?player.play():player.pause()}
+coverButton.addEventListener('click',togglePlayback);
+coverButton.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();togglePlayback()}});
+player.addEventListener('play',updateIcon);player.addEventListener('pause',updateIcon);player.addEventListener('ended',updateIcon);
+</script></body></html>
