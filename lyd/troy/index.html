@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Den trojanske hest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #f4efe6;
+      color: #222;
+      font-family: "Montserrat", Arial, sans-serif;
+    }
+    main {
+      width: min(100%, 620px);
+      margin: 0 auto;
+      padding-bottom: 32px;
+      text-align: center;
+    }
+    .cover {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .content {
+      padding: 28px 22px 0;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(28px, 7vw, 38px);
+      font-weight: 600;
+    }
+    p {
+      margin: 0 0 26px;
+      font-size: 16px;
+    }
+    audio {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <img class="cover" src="troy.jpg" alt="Illustrasjon fra Den trojanske hest">
+    <div class="content">
+      <h1>Den trojanske hest</h1>
+      <p>Bessens Illustrerte Lydbøker</p>
+      <audio controls preload="metadata">
+        <source src="troy.m4a" type="audio/mp4">
+        Nettleseren din støtter ikke lydavspilling.
+      </audio>
+    </div>
+  </main>
+</body>
+</html>
