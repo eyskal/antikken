@@ -1,33 +1,27 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="no">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Thesevs og Minotauren</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#35183e">
+<title>Thesevs og Minotauren | Bessens Illustrerte Lydbøker</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box} body{margin:0;min-height:100vh;background:#f4efe6;color:#222;font-family:"Montserrat",Arial,sans-serif;display:flex;justify-content:center}
-main{width:min(100%,620px);text-align:center;padding-bottom:max(28px,env(safe-area-inset-bottom))}
-.cover-wrap{position:relative;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}
-.cover{display:block;width:100%;height:auto}
-.play-button{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:92px;height:92px;border-radius:50%;border:3px solid rgba(255,255,255,.92);background:rgba(0,0,0,.45);color:#fff;font-size:42px;line-height:86px;text-align:center;padding-left:6px;box-shadow:0 4px 18px rgba(0,0,0,.35)}
-.content{padding:24px 20px 0} h1{margin:0 0 8px;font-size:clamp(26px,7vw,38px);font-weight:600} p{margin:0 0 20px;font-size:16px} audio{width:100%} .hint{margin-top:12px;font-size:13px;opacity:.7}
+*{box-sizing:border-box}body{margin:0;background:#1c1424;color:white;font-family:Montserrat,Arial,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:18px}.player{width:min(100%,540px);background:#35183e;border-radius:22px;overflow:hidden;box-shadow:0 12px 42px #0007}.cover{position:relative;aspect-ratio:1/1;background:#33233a}.cover img{display:block;width:100%;height:100%;object-fit:cover}.cover:before{content:"";position:absolute;inset:0 0 68% 0;background:linear-gradient(#100c1aa8,transparent);pointer-events:none}.cover h1{position:absolute;top:5%;left:4%;right:4%;text-align:center;font-size:clamp(25px,6vw,42px);font-weight:800;letter-spacing:-.04em;color:#ffdf79;text-shadow:0 2px 8px #160b19;margin:0}.controls{padding:19px 22px 14px;text-align:center}.buttons{display:flex;align-items:center;justify-content:center;gap:24px}.buttons button{border:2px solid #f7d978;border-radius:50%;background:#55235c;color:white;cursor:pointer;font-family:inherit;font-weight:700;display:grid;place-items:center}.buttons button:focus-visible,input:focus-visible{outline:3px solid #fff;outline-offset:4px}.play{width:86px;height:86px;font-size:35px}.restart{width:56px;height:56px;font-size:28px}.buttons button:active{transform:scale(.97)}.timeline{width:100%;accent-color:#f7d978;cursor:pointer;margin:17px 0 3px;min-height:24px}.times{display:flex;justify-content:space-between;font-size:13px;font-variant-numeric:tabular-nums;color:#f2e4ee}.status{font-size:13px;min-height:19px;color:#f7d978;margin:9px 0 0}.footer{background:#2b1232;border-top:1px solid #9b708f;text-align:center;padding:16px 10px 18px;font-size:clamp(10px,2.5vw,13px);font-weight:700;letter-spacing:.055em}.footer span{color:#f7d978} @media(max-width:400px){body{padding:0}.player{border-radius:0}.controls{padding:16px}}
 </style>
 </head>
-<body><main>
-<div class="cover-wrap" id="coverButton" role="button" tabindex="0" aria-label="Spill av Thesevs og Minotauren">
-<img class="cover" src="thesevs.jpg" alt="Illustrasjon fra Thesevs og Minotauren"><div class="play-button" id="playIcon">▶</div></div>
-<div class="content"><h1>Thesevs og Minotauren</h1><p>Bessens Illustrerte Lydbøker</p>
-<audio id="player" controls preload="metadata"><source src="thesevs.m4a" type="audio/mp4">Nettleseren din støtter ikke lydavspilling.</audio>
-<div class="hint">Trykk på bildet for å spille av eller sette på pause.</div></div>
+<body>
+<main class="player" aria-label="Lydbokavspiller for Thesevs og Minotauren">
+<div class="cover"><img src="theseus.jpg" alt="Thesevs og Minotauren betrakter en rose som er blitt til gull"><h1>Thesevs og Minotauren</h1></div>
+<div class="controls"><div class="buttons"><button class="restart" id="restart" type="button" aria-label="Start fortellingen på nytt" title="Start på nytt">↺</button><button class="play" id="play" type="button" aria-label="Spill av fortellingen" title="Spill av">▶</button></div>
+<input class="timeline" id="seek" type="range" min="0" max="1000" value="0" aria-label="Spol i fortellingen"><div class="times"><span id="current">0:00</span><span id="duration">–:––</span></div><p class="status" id="status" role="status">Trykk på ▶ for å høre fortellingen</p></div>
+<footer class="footer">BESSENS ILLUSTRERTE LYDBØKER <span>2026</span></footer>
+<audio id="audio" preload="metadata" src="theseus.m4a"></audio>
 </main>
 <script>
-const player=document.getElementById('player'),coverButton=document.getElementById('coverButton'),playIcon=document.getElementById('playIcon');
-function updateIcon(){playIcon.textContent=player.paused?'▶':'❚❚'}
-function togglePlayback(){player.paused?player.play():player.pause()}
-coverButton.addEventListener('click',togglePlayback);
-coverButton.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();togglePlayback()}});
-player.addEventListener('play',updateIcon);player.addEventListener('pause',updateIcon);player.addEventListener('ended',updateIcon);
-</script></body></html>
+(()=>{const a=document.getElementById('audio'),p=document.getElementById('play'),r=document.getElementById('restart'),s=document.getElementById('seek'),c=document.getElementById('current'),d=document.getElementById('duration'),status=document.getElementById('status');const fmt=t=>Number.isFinite(t)?`${Math.floor(t/60)}:${String(Math.floor(t%60)).padStart(2,'0')}`:'–:––';function sync(){p.textContent=a.paused?'▶':'Ⅱ';p.setAttribute('aria-label',a.paused?'Spill av fortellingen':'Sett fortellingen på pause');p.title=a.paused?'Spill av':'Pause';c.textContent=fmt(a.currentTime);d.textContent=fmt(a.duration);if(Number.isFinite(a.duration)&&a.duration>0)s.value=Math.round(a.currentTime/a.duration*1000)}p.addEventListener('click',async()=>{if(a.paused){try{await a.play();status.textContent='Fortellingen spilles av'}catch(e){status.textContent='Kunne ikke spille av lydfilen. Kontroller at theseus.m4a er lastet opp.'}}else{a.pause();status.textContent='Pause'}sync()});r.addEventListener('click',async()=>{a.currentTime=0;try{await a.play();status.textContent='Fortellingen starter på nytt'}catch(e){status.textContent='Trykk på ▶ for å starte'}sync()});s.addEventListener('input',()=>{if(Number.isFinite(a.duration)&&a.duration>0)a.currentTime=Number(s.value)/1000*a.duration;sync()});a.addEventListener('timeupdate',sync);a.addEventListener('loadedmetadata',sync);a.addEventListener('play',sync);a.addEventListener('pause',sync);a.addEventListener('ended',()=>{status.textContent='Fortellingen er ferdig. Trykk på ↺ for å høre den igjen.';sync()});a.addEventListener('error',()=>{status.textContent='Lydfilen kunne ikke åpnes. Sjekk at theseus.m4a ligger i samme mappe.'});sync()})();
+</script>
+</body>
+</html>
